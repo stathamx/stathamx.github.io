@@ -10,6 +10,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:opsz@14..32&display=swap" rel="stylesheet">
     <!-- Наши стили -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Дополнительные стили для модального окна калькулятора (если ещё не в style.css) -->
+    <style>
+        .modal-large {
+            max-width: 800px;
+            width: 90%;
+            height: 80vh;
+            padding: 20px;
+        }
+        .calc-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #1A1A1A;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
 
@@ -22,12 +38,23 @@
         </div>
     </div>
 
+    <!-- Модальное окно для калькулятора КБЖУ -->
+    <div id="calcModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close" id="closeCalc">&times;</span>
+            <iframe src="calculation.html" frameborder="0" class="calc-iframe"></iframe>
+        </div>
+    </div>
+
     <!-- Шапка -->
     <header class="header">
         <div class="container">
             <div class="header-inner">
                 <div class="logo" id="logo">STATHAM COMMUNITY</div>
-                <a href="https://t.me/+xe--AqXESy5hMDQy" class="btn btn-outline" target="_blank" rel="noopener">Войти</a>
+                <div class="header-buttons">
+                    <button class="btn btn-outline" id="calcBtn">КБЖУ</button>
+                    <button class="btn btn-outline" id="memBtn">ты еще сюда нажми</button>
+                </div>
             </div>
         </div>
     </header>
@@ -38,7 +65,7 @@
             <div class="container">
                 <h1 class="hero-title">Запомни две фразы и перед тобой откроются любые двери – от себя и на себя.</h1>
                 <p class="hero-subtitle">Сообщество, где вместо нытья – жим лёжа, вместо кредиток – инвестиции, а вместо сериалов – книги. Ты либо растёшь, либо остаёшься прежним. Третьего не дано.</p>
-                <a href="https://t.me/+xe--AqXESy5hMDQy" class="btn btn-primary" target="_blank" rel="noopener">Ворваться в чат</a>
+                <!-- Кнопка удалена -->
             </div>
         </section>
 
@@ -81,7 +108,7 @@
             <div class="container">
                 <h2 class="cta-title">Думаешь, это всё шутки?</h2>
                 <p class="cta-text">Тогда чего ты ждёшь? Пока жизнь пройдёт мимо? Нажимай кнопку, покажи, что ты не просто ссыкло, а мужик.</p>
-                <a href="https://t.me/+xe--AqXESy5hMDQy" class="btn btn-primary" target="_blank" rel="noopener">Вступить</a>
+                <a href="https://t.me/+xe--AqXESy5hMDQy" class="btn btn-primary" target="_blank" rel="noopener">Ворваться в statham community</a>
             </div>
         </section>
     </main>
@@ -93,6 +120,49 @@
         </div>
     </footer>
 
+    <!-- Скрипты -->
+    <script>
+        // Модальное окно для мема (открывается по логотипу и по кнопке "ты еще сюда нажми")
+        const memModal = document.getElementById('memModal');
+        const logo = document.getElementById('logo');
+        const memBtn = document.getElementById('memBtn');
+        const closeMem = memModal.querySelector('.close');
+
+        function openMemModal() {
+            memModal.style.display = 'flex';
+        }
+
+        logo.addEventListener('click', openMemModal);
+        memBtn.addEventListener('click', openMemModal);
+
+        closeMem.addEventListener('click', () => {
+            memModal.style.display = 'none';
+        });
+
+        // Модальное окно для калькулятора
+        const calcModal = document.getElementById('calcModal');
+        const calcBtn = document.getElementById('calcBtn');
+        const closeCalc = document.getElementById('closeCalc');
+
+        calcBtn.addEventListener('click', () => {
+            calcModal.style.display = 'flex';
+        });
+
+        closeCalc.addEventListener('click', () => {
+            calcModal.style.display = 'none';
+        });
+
+        // Закрытие модалок по клику вне окна
+        window.addEventListener('click', (event) => {
+            if (event.target === memModal) {
+                memModal.style.display = 'none';
+            }
+            if (event.target === calcModal) {
+                calcModal.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- Подключаем основной скрипт (если там есть другие функции, например анимация появления) -->
     <script src="js/script.js"></script>
 </body>
 </html>

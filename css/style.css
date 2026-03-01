@@ -304,3 +304,37 @@ section {
         gap: 15px;
     }
 }
+
+.header-buttons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.modal-large {
+    max-width: 800px;
+    width: 90%;
+    height: 80vh;
+    padding: 20px;
+}
+
+.calc-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: #1A1A1A;
+    border-radius: 4px;
+}
+
+@media (max-width: 480px) {
+    .header-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .header-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
