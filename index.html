@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statham Community – мужики меняют жизнь</title>
-    <!-- Подключаем шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:opsz@14..32&display=swap" rel="stylesheet">
-    <!-- Наши стили -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- Дополнительные стили для модального окна калькулятора (если ещё не в style.css) -->
     <style>
         .modal-large {
             max-width: 800px;
@@ -29,16 +26,14 @@
 </head>
 <body>
 
-    <!-- Модальное окно с мемом (изначально скрыто) -->
     <div id="memModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <img src="assets/death-in-poverty.jpg" alt="Смерть в нищите звонит лев" class="modal-img">
-            <p class="modal-caption">Ты либо берёшь трубку, либо идёшь на дно.</p>
+            <p class="modal-caption">Сначала поработать..</p>
         </div>
     </div>
 
-    <!-- Модальное окно для калькулятора КБЖУ -->
     <div id="calcModal" class="modal">
         <div class="modal-content modal-large">
             <span class="close" id="closeCalc">&times;</span>
@@ -46,13 +41,12 @@
         </div>
     </div>
 
-    <!-- Шапка -->
     <header class="header">
         <div class="container">
             <div class="header-inner">
                 <div class="logo" id="logo">STATHAM COMMUNITY</div>
                 <div class="header-buttons">
-                    <button class="btn btn-outline" id="calcBtn">КБЖУ</button>
+                    <button class="btn btn-outline" id="calcBtn">Расчет КБЖУ</button>
                     <button class="btn btn-outline" id="memBtn">ты еще сюда нажми</button>
                 </div>
             </div>
@@ -60,16 +54,13 @@
     </header>
 
     <main>
-        <!-- Герой (первый экран) -->
         <section class="hero">
             <div class="container">
                 <h1 class="hero-title">Запомни две фразы и перед тобой откроются любые двери – от себя и на себя.</h1>
                 <p class="hero-subtitle">Сообщество, где вместо нытья – жим лёжа, вместо кредиток – инвестиции, а вместо сериалов – книги. Ты либо растёшь, либо остаёшься прежним. Третьего не дано.</p>
-                <!-- Кнопка удалена -->
             </div>
         </section>
 
-        <!-- Направления (четыре блока с цитатами) -->
         <section class="directions">
             <div class="container">
                 <h2 class="section-title">Направления, по которым мы растем</h2>
@@ -94,7 +85,6 @@
             </div>
         </section>
 
-        <!-- Кого мы ждём (правила входа) -->
         <section class="rules">
             <div class="container">
                 <h2 class="section-title">Сюда только для тех, кто реально хочет меняться</h2>
@@ -103,7 +93,6 @@
             </div>
         </section>
 
-        <!-- Финальный призыв -->
         <section class="cta">
             <div class="container">
                 <h2 class="cta-title">Думаешь, это всё шутки?</h2>
@@ -113,56 +102,12 @@
         </section>
     </main>
 
-    <!-- Футер -->
     <footer class="footer">
         <div class="container">
             <p class="footer-copy">© 2026 Statham Community. Сделано с ненавистью к лени и любовью к железу.</p>
         </div>
     </footer>
 
-    <!-- Скрипты -->
-    <script>
-        // Модальное окно для мема (открывается по логотипу и по кнопке "ты еще сюда нажми")
-        const memModal = document.getElementById('memModal');
-        const logo = document.getElementById('logo');
-        const memBtn = document.getElementById('memBtn');
-        const closeMem = memModal.querySelector('.close');
-
-        function openMemModal() {
-            memModal.style.display = 'flex';
-        }
-
-        logo.addEventListener('click', openMemModal);
-        memBtn.addEventListener('click', openMemModal);
-
-        closeMem.addEventListener('click', () => {
-            memModal.style.display = 'none';
-        });
-
-        // Модальное окно для калькулятора
-        const calcModal = document.getElementById('calcModal');
-        const calcBtn = document.getElementById('calcBtn');
-        const closeCalc = document.getElementById('closeCalc');
-
-        calcBtn.addEventListener('click', () => {
-            calcModal.style.display = 'flex';
-        });
-
-        closeCalc.addEventListener('click', () => {
-            calcModal.style.display = 'none';
-        });
-
-        // Закрытие модалок по клику вне окна
-        window.addEventListener('click', (event) => {
-            if (event.target === memModal) {
-                memModal.style.display = 'none';
-            }
-            if (event.target === calcModal) {
-                calcModal.style.display = 'none';
-            }
-        });
-    </script>
-    <!-- Подключаем основной скрипт (если там есть другие функции, например анимация появления) -->
     <script src="js/script.js"></script>
 </body>
 </html>

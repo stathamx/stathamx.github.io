@@ -1,18 +1,13 @@
-// Ждём загрузку DOM
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Модальное окно для мема ---
+    // --- Модальное окно для мема (только по кнопке) ---
     const memModal = document.getElementById('memModal');
-    const logo = document.getElementById('logo');
     const memBtn = document.getElementById('memBtn');
     const closeMem = memModal?.querySelector('.close');
 
-    if (memModal && logo && memBtn && closeMem) {
-        function openMemModal() {
+    if (memModal && memBtn && closeMem) {
+        memBtn.addEventListener('click', () => {
             memModal.style.display = 'flex';
-        }
-
-        logo.addEventListener('click', openMemModal);
-        memBtn.addEventListener('click', openMemModal);
+        });
 
         closeMem.addEventListener('click', () => {
             memModal.style.display = 'none';
