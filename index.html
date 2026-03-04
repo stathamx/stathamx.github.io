@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>STATHAM COMMUNITY | Рост или стагнация</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+    <!-- Модальное окно: Мем -->
     <div id="memModal" class="modal">
         <div class="modal-content modal-mem">
             <span class="close" id="closeMem">&times;</span>
@@ -22,10 +25,11 @@
         </div>
     </div>
 
+    <!-- Модальное окно: Калькулятор -->
     <div id="calcModal" class="modal">
         <div class="modal-content modal-large">
             <span class="close" id="closeCalc">&times;</span>
-            <div class="iframe-wrapper">
+            <div class="iframe-scroll-wrapper">
                 <iframe src="calculation.html" frameborder="0" class="calc-iframe"></iframe>
             </div>
         </div>
@@ -33,7 +37,7 @@
 
     <header class="header">
         <div class="container header-inner">
-            <div class="logo">STATHAM <span>COMMUNITY</span></div>
+            <a href="#" class="logo">STATHAM <span>COMMUNITY</span></a>
             <nav class="header-buttons">
                 <button class="btn btn-text" id="calcBtn">КАЛЬКУЛЯТОР</button>
                 <button class="btn btn-outline" id="memBtn">ты еще сюда нажми</button>
@@ -43,7 +47,9 @@
 
     <main>
         <section class="hero">
-            <div class="hero-bg"><img src="assets/statham-hero.jpg" alt="Statham Hero"></div>
+            <div class="hero-bg">
+                <img src="assets/statham-hero.jpg" alt="Jason Statham">
+            </div>
             <div class="container hero-content">
                 <div class="badge fade-up">EST. 2026</div>
                 <h1 class="hero-title fade-up">Запомни две фразы и перед тобой откроются любые двери – <span>от себя и на себя.</span></h1>
@@ -58,19 +64,57 @@
             <div class="container">
                 <h2 class="section-title fade-up">НАПРАВЛЕНИЯ РОСТА</h2>
                 <div class="bento-grid">
-                    <div class="bento-item card-large fade-up"><div class="card-content"><span class="card-num">01</span><h3>ПОТРЕБЛЕНИЕ</h3><p>«Ты то, что ты жрёшь. Если жрёшь говно – станешь говном. И речь не только про еду.»</p></div></div>
-                    <div class="bento-item card-small fade-up"><div class="card-content"><span class="card-num">02</span><h3>СПОРТ</h3><p>«Оторвись от отжиманий и сделай 20 компов.»</p></div></div>
-                    <div class="bento-item card-small fade-up"><div class="card-content"><span class="card-num">03</span><h3>ФИНАНСЫ</h3><p>«Научись копить и приумножать. Не лезь в чужие дела, ведь дела могут быть в жопе.»</p></div></div>
-                    <div class="bento-item card-medium fade-up"><div class="card-content"><span class="card-num">04</span><h3>МОРАЛЬНАЯ УСТОЙЧИВОСТЬ</h3><p>«Если человек гандон — то и отношения с ним будут натянутыми.»</p></div></div>
-                    <div class="bento-item card-medium fade-up"><div class="card-content"><span class="card-num">05</span><h3>РАЗУМ</h3><p>«Включай голову, а не только инстаграм. Развивайся — книги в свободном доступе.»</p></div></div>
-                    <div class="bento-item card-wide fade-up"><div class="card-content"><span class="card-num">06</span><h3>ВИЗУАЛ</h3><p>«Покушал, почитал, подкачался, помылся, оделся — и ахуенчик. Твой фейс — твой мерчендайз.»</p></div></div>
+                    <div class="bento-item card-large fade-up">
+                        <div class="card-content">
+                            <span class="card-num">01</span>
+                            <h3>ПОТРЕБЛЕНИЕ</h3>
+                            <p>«Ты то, что ты жрёшь. Если жрёшь говно – станешь говном. И речь не только про еду»</p>
+                        </div>
+                    </div>
+                    <div class="bento-item card-small fade-up">
+                        <div class="card-content">
+                            <span class="card-num">02</span>
+                            <h3>СПОРТ</h3>
+                            <p>«Оторвись от отжиманий и сделай 20 компов»</p>
+                        </div>
+                    </div>
+                    <div class="bento-item card-small fade-up">
+                        <div class="card-content">
+                            <span class="card-num">03</span>
+                            <h3>ФИНАНСЫ</h3>
+                            <p>«Научись копить и приумножать. Не лезь в чужие дела, ведь дела могут быть в жопе»</p>
+                        </div>
+                    </div>
+                    <div class="bento-item card-medium fade-up">
+                        <div class="card-content">
+                            <span class="card-num">04</span>
+                            <h3>МОРАЛЬНАЯ УСТОЙЧИВОСТЬ</h3>
+                            <p>«Если человек гандон — то и отношения с ним будут натянутыми»</p>
+                        </div>
+                    </div>
+                    <div class="bento-item card-medium fade-up">
+                        <div class="card-content">
+                            <span class="card-num">05</span>
+                            <h3>РАЗУМ</h3>
+                            <p>«Включай голову, а не только инстаграм. Развивайся — книги в свободном доступе»</p>
+                        </div>
+                    </div>
+                    <div class="bento-item card-wide fade-up">
+                        <div class="card-content">
+                            <span class="card-num">06</span>
+                            <h3>ВИЗУАЛ</h3>
+                            <p>«Покушал, почитал, подкачался, помылся, оделся — и ахуенчик. Твой фейс — твой мерчендайз»</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="rules">
             <div class="container rules-wrapper">
-                <div class="rules-image fade-up"><img src="assets/statham-portrait.jpg" alt="Statham"></div>
+                <div class="rules-image fade-up">
+                    <img src="assets/statham-portrait.jpg" alt="Statham">
+                </div>
                 <div class="rules-content fade-up">
                     <h2 class="section-title left">Секрет успеха прост - но это секрет.</h2>
                     <p class="rules-text">Если ты готов ебашить, то тебе сюда. Главное взвешанное желание идти до конца, а конец у всех свой. Есть сомнения — то нахуй оно тебе надо, кайфуй пока молодой.</p>
@@ -96,25 +140,9 @@
     </main>
 
     <footer class="footer">
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <div class="logo">STATHAM <span>COMMUNITY</span></div>
-                <p class="footer-tagline">Либо ты создаешь результат, либо ты создаешь оправдания.</p>
-            </div>
-            <div class="footer-info">
-                <div class="footer-col">
-                    <span class="footer-label">МЕТОДОЛОГИЯ</span>
-                    <p>ДИСЦИПЛИНА • ТРУД • РОСТ</p>
-                </div>
-                <div class="footer-col">
-                    <span class="footer-label">КОНТАКТЫ</span>
-                    <p>TELEGRAM • COMMUNITY</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p class="footer-copy">© 2026 STATHAM COMMUNITY.</p>
-                <p class="footer-hate">СДЕЛАНО С НЕНАВИСТЬЮ К ЛЕНИ</p>
-            </div>
+        <div class="container footer-bottom">
+            <p class="footer-copy">© 2026 STATHAM COMMUNITY. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
+            <p class="footer-hate">СДЕЛАНО С НЕНАВИСТЬЮ К ЛЕНИ</p>
         </div>
     </footer>
 
