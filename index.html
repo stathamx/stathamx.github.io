@@ -3,116 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STATHAM COMMUNITY</title>
+    <title>STATHAM COMMUNITY | Рост или стагнация</title>
+    
+    <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        .modal-large {
-            max-width: 800px;
-            width: 90%;
-            height: 80vh;
-            padding: 20px;
-        }
-        .calc-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background-color: #1A1A1A;
-            border-radius: 4px;
-        }
-    </style>
 </head>
 <body>
 
+    <!-- Модальное окно: Мем -->
     <div id="memModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <img src="assets/death-in-poverty.jpg" alt="Смерть в нищите звонит лев" class="modal-img">
+            <span class="close" id="closeMem">&times;</span>
+            <div class="modal-badge">STATHAM ADVICE</div>
+            <img src="assets/death-in-poverty.jpg" alt="Advice" class="modal-img">
             <p class="modal-caption">Деньги не главное, главное их наличие</p>
         </div>
     </div>
 
+    <!-- Модальное окно: Калькулятор (Интегрированный) -->
     <div id="calcModal" class="modal">
         <div class="modal-content modal-large">
             <span class="close" id="closeCalc">&times;</span>
-            <iframe src="calculation.html" frameborder="0" class="calc-iframe"></iframe>
+            <div class="calc-container">
+                <div class="calc-header">
+                    <h2>КБЖУ КАЛЬКУЛЯТОР</h2>
+                    <p>Настрой свой топливный бак</p>
+                </div>
+                
+                <form id="calcForm" class="calc-grid">
+                    <div class="input-group">
+                        <label>ПОЛ</label>
+                        <select id="gender">
+                            <option value="male">МУЖСКОЙ</option>
+                            <option value="female">ЖЕНСКИЙ</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>ВЕС (КГ)</label>
+                        <input type="number" id="weight" placeholder="75" required>
+                    </div>
+                    <div class="input-group">
+                        <label>РОСТ (СМ)</label>
+                        <input type="number" id="height" placeholder="180" required>
+                    </div>
+                    <div class="input-group">
+                        <label>ВОЗРАСТ</label>
+                        <input type="number" id="age" placeholder="25" required>
+                    </div>
+                    <div class="input-group full-width">
+                        <label>АКТИВНОСТЬ</label>
+                        <select id="activity">
+                            <option value="1.2">Сидячий образ жизни</option>
+                            <option value="1.375">1-3 тренировки в неделю</option>
+                            <option value="1.55" selected>3-5 тренировок в неделю</option>
+                            <option value="1.725">6-7 тяжелых тренировок</option>
+                        </select>
+                    </div>
+                    <div class="input-group full-width">
+                        <label>ЦЕЛЬ</label>
+                        <select id="goal">
+                            <option value="weight_loss">ПОХУДЕНИЕ (-20%)</option>
+                            <option value="maintain">ПОДДЕРЖАНИЕ</option>
+                            <option value="weight_gain">НАБОР МАССЫ (+20%)</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary full-width" onclick="calculateKBJU()">РАССЧИТАТЬ МАКРОСЫ</button>
+                </form>
+
+                <div id="result" class="result-display" style="display: none;">
+                    <!-- Сюда JS вставит данные -->
+                </div>
+            </div>
         </div>
     </div>
 
     <header class="header">
-        <div class="container">
-            <div class="header-inner">
-                <div class="logo" id="logo">STATHAM COMMUNITY</div>
-                <div class="header-buttons">
-                    <button class="btn btn-outline" id="calcBtn">Расчет КБЖУ</button>
-                    <button class="btn btn-outline" id="memBtn">ты еще сюда нажми</button>
-                </div>
-            </div>
+        <div class="container header-inner">
+            <div class="logo">STATHAM <span>COMMUNITY</span></div>
+            <nav class="header-buttons">
+                <button class="btn btn-text" id="calcBtn">КАЛЬКУЛЯТОР</button>
+                <button class="btn btn-outline" id="memBtn">БАЗА</button>
+            </nav>
         </div>
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section class="hero">
-            <div class="container">
-                <h1 class="hero-title">Запомни две фразы и перед тобой откроются любые двери – от себя и на себя.</h1>
-                <p class="hero-subtitle">Сообщество, вместо нытья - работа, вместо кредитов - инвестиции. Рост или стагнация. Третьего не дано.</p>
+            <div class="hero-bg">
+                <img src="assets/statham-hero.jpg" alt="Jason Statham Hero">
+            </div>
+            <div class="container hero-content">
+                <div class="badge fade-up">EST. 2024</div>
+                <h1 class="hero-title fade-up">Запомни две фразы и перед тобой откроются любые двери – <span>от себя и на себя.</span></h1>
+                <p class="hero-subtitle fade-up">Вместо нытья — работа. Вместо кредитов — инвестиции. Рост или стагнация. Третьего не дано.</p>
+                <div class="hero-actions fade-up">
+                    <a href="#directions" class="btn btn-primary">ИЗУЧИТЬ НАПРАВЛЕНИЯ</a>
+                </div>
             </div>
         </section>
 
-        <section class="directions">
+        <!-- Directions Section (Bento Grid) -->
+        <section class="directions" id="directions">
             <div class="container">
-                <h2 class="section-title">Направления роста:</h2>
-                <div class="cards-grid">
-                    <div class="card fade-up">
-                        <h3 class="card-title">🍗 ПОТРЕБЛЕНИЕ</h3>
-                        <p class="card-quote">«Ты то, что ты жрёшь. Если жрёшь говно – станешь говном. И речь не только про еду.»</p>
+                <h2 class="section-title fade-up">НАПРАВЛЕНИЯ РОСТА</h2>
+                <div class="bento-grid">
+                    <div class="bento-item card-large fade-up">
+                        <div class="card-content">
+                            <span class="card-num">01</span>
+                            <h3>ПОТРЕБЛЕНИЕ</h3>
+                            <p>«Ты то, что ты жрёшь. Если жрёшь говно – станешь говном. И речь не только про еду.»</p>
+                        </div>
                     </div>
-                    <div class="card fade-up">
-                        <h3 class="card-title">🏋️ СПОРТ</h3>
-                        <p class="card-quote">«Оторвись от отжиманий и сделай 20 компов.»</p>
+                    <div class="bento-item card-small fade-up">
+                        <div class="card-content">
+                            <span class="card-num">02</span>
+                            <h3>СПОРТ</h3>
+                            <p>«Оторвись от отжиманий и сделай 20 компов.»</p>
+                        </div>
                     </div>
-                    <div class="card fade-up">
-                        <h3 class="card-title">💰 ФИНАНСЫ</h3>
-                        <p class="card-quote">«Научись копить и приумножать, Не лезь в чужие дела, ведь дела могут быть в жопе.»</p>
+                    <div class="bento-item card-small fade-up">
+                        <div class="card-content">
+                            <span class="card-num">03</span>
+                            <h3>ФИНАНСЫ</h3>
+                            <p>«Научись копить и приумножать. Не лезь в чужие дела, ведь дела могут быть в жопе.»</p>
+                        </div>
                     </div>
-                    <div class="card fade-up">
-                        <h3 class="card-title">📚 МОРАЛЬНАЯ УСТОЙЧИВОСТЬ</h3>
-                        <p class="card-quote">«Если человек гандон - то и отношения с ним будут натянутыми.»</p>
+                    <div class="bento-item card-medium fade-up">
+                        <div class="card-content">
+                            <span class="card-num">04</span>
+                            <h3>МОРАЛЬ</h3>
+                            <p>«Если человек гандон — то и отношения с ним будут натянутыми.»</p>
+                        </div>
                     </div>
-                    <div class="card fade-up">
-                        <h3 class="card-title">🧠 РАЗУМ</h3>
-                        <p class="card-quote">«Включай голову, а не только инстаграм. В общем, Развивайся - книги в свободном доступе.»</p>
+                    <div class="bento-item card-medium fade-up">
+                        <div class="card-content">
+                            <span class="card-num">05</span>
+                            <h3>РАЗУМ</h3>
+                            <p>«Включай голову, а не только инстаграм. Развивайся — книги в свободном доступе.»</p>
+                        </div>
                     </div>
-                    <div class="card fade-up">
-                        <h3 class="card-title">👔 ВИЗУАЛ</h3>
-                        <p class="card-quote">«Покушал, почитал, подкачался, помылся, оделся - и ахуенчик. Твой фейс - твой мерчендайз.»</p>
+                    <div class="bento-item card-wide fade-up">
+                        <div class="card-content">
+                            <span class="card-num">06</span>
+                            <h3>ВИЗУАЛ</h3>
+                            <p>«Покушал, почитал, подкачался, помылся, оделся — и ахуенчик. Твой фейс — твой мерчендайз.»</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Rules Section -->
         <section class="rules">
-            <div class="container">
-                <h2 class="section-title">Секрет успеха прост - но это секрет.</h2>
-                <p class="rules-text">Если ты готов ебашить, то тебе сюда. Главное взвешанное желание идти до конца, а конец у всех свой. Есть сомнения - то нахуй оно тебе надо, кайфуй пока молодой.</p>
-                <p class="rules-note">И напоследок запомни: Бьют - дерись. Упал - поднимись. Наделал кучу - уберись.</p>
+            <div class="container rules-wrapper">
+                <div class="rules-image fade-up">
+                    <img src="assets/statham-portrait.jpg" alt="Statham">
+                </div>
+                <div class="rules-content fade-up">
+                    <h2 class="section-title left">СЕКРЕТ УСПЕХА ПРОСТ</h2>
+                    <p class="rules-text">Если ты готов ебашить, то тебе сюда. Главное взвешанное желание идти до конца, а конец у всех свой. Есть сомнения — то нахуй оно тебе надо, кайфуй пока молодой.</p>
+                    <div class="rules-list">
+                        <div class="rule-item"><span>01</span> Бьют — дерись.</div>
+                        <div class="rule-item"><span>02</span> Упал — поднимись.</div>
+                        <div class="rule-item"><span>03</span> Наделал кучу — уберись.</div>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- CTA Section -->
         <section class="cta">
             <div class="container">
-                <h2 class="cta-title">Делай как надо, как не надо не делай.</h2>
-                <p class="cta-text">Если тебя огорчает наступление понедельника, работай без выходных и врывайся с двух ног.</p>
-                <a href="https://t.me/+xe--AqXESy5hMDQy" class="btn btn-primary" target="_blank" rel="noopener">Ворваться в STATHAM COMMUNITY</a>
+                <div class="cta-box fade-up">
+                    <h2 class="cta-title">ДЕЛАЙ КАК НАДО, КАК НЕ НАДО НЕ ДЕЛАЙ.</h2>
+                    <p class="cta-text">Если тебя огорчает наступление понедельника, работай без выходных и врывайся с двух ног.</p>
+                    <a href="https://t.me/+xe--AqXESy5hMDQy" class="btn btn-primary btn-lg" target="_blank">ВОРВАТЬСЯ В COMMUNITY</a>
+                </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <p class="footer-copy">© 2026 Statham Community. Сделано с ненавистью к лени и любовью к спорту</p>
+        <div class="container footer-inner">
+            <p>© 2026 STATHAM COMMUNITY. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
+            <p class="footer-meta">СДЕЛАНО С НЕНАВИСТЬЮ К ЛЕНИ</p>
         </div>
     </footer>
 
