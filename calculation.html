@@ -8,59 +8,56 @@
     <style>
         :root { --primary: #A3B565; --bg: #000; --card: #111; --text: #eee; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding: 20px; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding: 15px; overflow-x: hidden; }
         
-        .container { max-width: 800px; margin: 0 auto; background: var(--card); border: 1px solid #222; padding: 40px; }
-        h2 { font-family: 'Bebas Neue'; color: var(--primary); font-size: 2.5rem; margin-bottom: 5px; }
-        .subtitle { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: #555; margin-bottom: 30px; letter-spacing: 1px; }
+        .container { max-width: 800px; margin: 0 auto; background: var(--card); border: 1px solid #222; padding: 25px; }
+        h2 { font-family: 'Bebas Neue'; color: var(--primary); font-size: 2rem; margin-bottom: 5px; }
+        .subtitle { font-family: 'JetBrains Mono'; font-size: 0.65rem; color: #555; margin-bottom: 20px; }
 
-        /* Ввод данных */
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .group { display: flex; flex-direction: column; gap: 8px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .group { display: flex; flex-direction: column; gap: 5px; }
         .full { grid-column: span 2; }
-        label { font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--primary); }
-        input, select { background: #050505; border: 1px solid #333; padding: 12px; color: #fff; font-size: 1rem; }
+        label { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--primary); }
+        input, select { background: #050505; border: 1px solid #333; padding: 10px; color: #fff; font-size: 1rem; border-radius: 0; appearance: none; }
         
-        /* Кнопки переключатели */
-        .toggle-group { display: flex; gap: 10px; }
-        .toggle-btn { flex: 1; padding: 10px; border: 1px solid #333; background: transparent; color: #666; cursor: pointer; font-family: 'Bebas Neue'; font-size: 1.1rem; }
+        .toggle-group { display: flex; gap: 5px; }
+        .toggle-btn { flex: 1; padding: 10px; border: 1px solid #333; background: transparent; color: #666; cursor: pointer; font-family: 'Bebas Neue'; font-size: 1rem; }
         .toggle-btn.active { border-color: var(--primary); color: var(--primary); background: rgba(163,181,101,0.1); }
 
-        .btn-main { background: var(--primary); color: #000; border: none; padding: 15px; font-family: 'Bebas Neue'; font-size: 1.5rem; cursor: pointer; margin-top: 20px; transition: 0.3s; }
-        .btn-main:hover { background: #fff; }
+        .btn-main { background: var(--primary); color: #000; border: none; padding: 15px; font-family: 'Bebas Neue'; font-size: 1.4rem; cursor: pointer; margin-top: 15px; width: 100%; }
 
-        /* Результаты */
-        .results { display: none; margin-top: 40px; animation: fadeIn 0.5s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .res-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px; }
-        .res-card { background: #050505; border-bottom: 2px solid #222; padding: 20px; text-align: left; }
-        .res-card.accent { border-color: var(--primary); }
-        .res-label { font-family: 'JetBrains Mono'; font-size: 0.65rem; color: var(--primary); display: block; margin-bottom: 10px; }
-        .res-val { font-family: 'Bebas Neue'; font-size: 2rem; }
-        .res-sub { font-size: 0.75rem; color: #555; margin-top: 5px; }
+        .results { display: none; margin-top: 30px; }
+        .res-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+        .res-card { background: #050505; border-bottom: 2px solid #222; padding: 15px; }
+        .res-card.accent { border-color: var(--primary); grid-column: span 2; }
+        .res-label { font-family: 'JetBrains Mono'; font-size: 0.6rem; color: var(--primary); display: block; margin-bottom: 5px; }
+        .res-val { font-family: 'Bebas Neue'; font-size: 1.8rem; }
+        .res-sub { font-size: 0.7rem; color: #555; }
 
-        .bmi-box { grid-column: span 3; background: #080808; padding: 20px; border: 1px solid #222; }
-        .bmi-bar { height: 8px; background: linear-gradient(to right, #3498db, #2ecc71, #f1c40f, #e74c3c); margin: 15px 0; position: relative; }
-        .bmi-ptr { position: absolute; top: -6px; width: 4px; height: 20px; background: #fff; transition: 0.5s; }
+        .bmi-box { grid-column: span 2; background: #080808; padding: 15px; border: 1px solid #222; }
+        .bmi-bar { height: 6px; background: linear-gradient(to right, #3498db, #2ecc71, #f1c40f, #e74c3c); margin: 10px 0; position: relative; }
+        .bmi-ptr { position: absolute; top: -5px; width: 3px; height: 16px; background: #fff; }
 
-        /* Теория */
-        .theory-section { margin-top: 40px; border-top: 1px solid #222; padding-top: 30px; }
-        .theory-card { margin-bottom: 20px; }
-        .theory-card h4 { font-family: 'Bebas Neue'; color: var(--primary); margin-bottom: 8px; font-size: 1.2rem; }
-        .theory-card p { font-size: 0.85rem; color: #888; line-height: 1.5; }
+        .theory-section { margin-top: 30px; border-top: 1px solid #222; padding-top: 20px; }
+        .theory-card { margin-bottom: 15px; }
+        .theory-card h4 { font-family: 'Bebas Neue'; color: var(--primary); margin-bottom: 5px; }
+        .theory-card p { font-size: 0.8rem; color: #777; line-height: 1.4; }
 
-        .btn-copy { background: transparent; border: 1px solid #444; color: #888; padding: 10px 20px; font-family: 'JetBrains Mono'; font-size: 0.7rem; cursor: pointer; margin-top: 20px; width: 100%; }
-        .btn-copy:hover { border-color: var(--primary); color: var(--primary); }
+        .btn-copy { background: transparent; border: 1px solid #333; color: #666; padding: 10px; font-family: 'JetBrains Mono'; font-size: 0.7rem; cursor: pointer; width: 100%; margin-top: 10px; }
 
-        @media (max-width: 600px) { .form-grid, .res-grid { grid-template-columns: 1fr; } .res-grid div { grid-column: span 1; } }
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .res-grid { grid-template-columns: 1fr; }
+            .res-card.accent, .bmi-box { grid-column: span 1; }
+            .container { padding: 15px; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>NUTRITION DIAGNOSTICS</h2>
-    <p class="subtitle">STATHAM COMMUNITY • CALCULATION ENGINE V2.0</p>
+    <h2>NUTRITION CENTER</h2>
+    <p class="subtitle">STATHAM COMMUNITY • ENGINE V2.0</p>
 
     <div class="form-grid">
         <div class="group full">
@@ -70,17 +67,18 @@
                 <button class="toggle-btn" onclick="setToggle('gender', 'female', this)">ЖЕНСКИЙ</button>
             </div>
         </div>
-        <div class="group"><label>ВЕС (КГ)</label><input type="number" id="weight" placeholder="75"></div>
-        <div class="group"><label>РОСТ (СМ)</label><input type="number" id="height" placeholder="180"></div>
-        <div class="group"><label>ВОЗРАСТ</label><input type="number" id="age" placeholder="25"></div>
-        <div class="group">
-            <label>АКТИВНОСТЬ</label>
-            <select id="activity">
-                <option value="1.2">Сидячий образ</option>
-                <option value="1.375">1-2 тренировки</option>
-                <option value="1.55" selected>3-5 тренировок</option>
-                <option value="1.725">6-7 тренировок</option>
-            </select>
+        <div class="group"><label>ВЕС (КГ)</label><input type="number" id="weight" placeholder="00"></div>
+        <div class="group"><label>РОСТ (СМ)</label><input type="number" id="height" placeholder="000"></div>
+        <div class="group full">
+            <label>ВОЗРАСТ / АКТИВНОСТЬ</label>
+            <div style="display:flex; gap:10px;">
+                <input type="number" id="age" style="width:70px" placeholder="25">
+                <select id="activity" style="flex-grow:1;">
+                    <option value="1.2">Сидячий</option>
+                    <option value="1.55" selected>Средний</option>
+                    <option value="1.725">Высокий</option>
+                </select>
+            </div>
         </div>
         <div class="group full">
             <label>ВАША ЦЕЛЬ</label>
@@ -90,109 +88,55 @@
                 <button class="toggle-btn" onclick="setToggle('goal', 'gain', this)">МАССА</button>
             </div>
         </div>
-        <button class="btn-main full" onclick="calculate()">ПРОВЕСТИ АНАЛИЗ</button>
+        <button class="btn-main full" onclick="calculate()">АНАЛИЗ</button>
     </div>
 
     <div class="results" id="results">
         <div class="res-grid">
-            <div class="res-card accent"><span class="res-label">ЦЕЛЕВАЯ КАЛОРИЙНОСТЬ</span><span class="res-val" id="outKcal">0</span><span class="res-sub">ККАЛ / ДЕНЬ</span></div>
-            <div class="res-card"><span class="res-label">ВОДА</span><span class="res-val" id="outWater">0</span><span class="res-sub">ЛИТРОВ / ДЕНЬ</span></div>
-            <div class="res-card"><span class="res-label">УБМ (BMR)</span><span class="res-val" id="outBmr">0</span><span class="res-sub">БАЗОВЫЙ РАСХОД</span></div>
-            
+            <div class="res-card accent"><span class="res-label">ЦЕЛЬ</span><span class="res-val" id="outKcal">0</span><span class="res-sub">ККАЛ</span></div>
+            <div class="res-card"><span class="res-label">ВОДА</span><span class="res-val" id="outWater">0</span><span class="res-sub">ЛИТРОВ</span></div>
+            <div class="res-card"><span class="res-label">BMR</span><span class="res-val" id="outBmr">0</span><span class="res-sub">БАЗА</span></div>
             <div class="bmi-box">
-                <span class="res-label">ИНДЕКС МАССЫ ТЕЛА (BMI): <span id="outBmi" style="color:#fff">0</span></span>
+                <span class="res-label">BMI: <span id="outBmi">0</span></span>
                 <div class="bmi-bar"><div class="bmi-ptr" id="bmiPtr"></div></div>
-                <p id="outBmiText" style="font-size:0.8rem; color:var(--primary); font-family:'JetBrains Mono'"></p>
             </div>
-
-            <div class="res-card"><span class="res-label">БЕЛКИ</span><span class="res-val" id="outP">0г</span><span class="res-sub" id="outPkcal">0 ккал</span></div>
-            <div class="res-card"><span class="res-label">ЖИРЫ</span><span class="res-val" id="outF">0г</span><span class="res-sub" id="outFkcal">0 ккал</span></div>
-            <div class="res-card"><span class="res-label">УГЛЕВОДЫ</span><span class="res-val" id="outC">0г</span><span class="res-sub" id="outCkcal">0 ккал</span></div>
+            <div class="res-card"><span class="res-label">БЕЛКИ</span><span class="res-val" id="outP">0</span><span class="res-sub" id="outPk">0к</span></div>
+            <div class="res-card"><span class="res-label">ЖИРЫ</span><span class="res-val" id="outF">0</span><span class="res-sub" id="outFk">0к</span></div>
         </div>
-
-        <div class="theory-section">
-            <div class="theory-card">
-                <h4>ФОРМУЛА МИФФЛИНА-САН ЖЕОРА</h4>
-                <p>Самый точный алгоритм расчета калорий для современных людей. Учитывает базальный метаболизм и коэффициент термогенного эффекта пищи.</p>
-            </div>
-            <div class="theory-card">
-                <h4>ЧТО ТАКОЕ ИМТ?</h4>
-                <p>Показатель соотношения роста и веса. Важно понимать: ИМТ не видит разницы между мышцами и жиром, поэтому для атлетов цифры могут быть выше нормы при низком проценте жира.</p>
-            </div>
-            <div class="theory-card">
-                <h4>ЗАЧЕМ СТОЛЬКО ВОДЫ?</h4>
-                <p>33мл на 1кг веса — это топливо для твоего метаболизма. Без воды синтез белка замедляется на 20%.</p>
-            </div>
-        </div>
-
-        <button class="btn-copy" onclick="copyReport()">СКОПИРОВАТЬ ОТЧЕТ В ТЕЛЕГРАМ</button>
+        <button class="btn-copy" onclick="copyReport()">КОПИРОВАТЬ ОТЧЕТ</button>
     </div>
 </div>
 
 <script>
     let data = { gender: 'male', goal: 'main' };
-
-    function setToggle(key, val, el) {
-        const parent = el.parentElement;
-        parent.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-        el.classList.add('active');
-        data[key] = val;
+    function setToggle(k, v, el) {
+        el.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        el.classList.add('active'); data[k] = v;
     }
-
     function calculate() {
-        const w = parseFloat(document.getElementById('weight').value);
-        const h = parseFloat(document.getElementById('height').value);
-        const a = parseFloat(document.getElementById('age').value);
-        const act = parseFloat(document.getElementById('activity').value);
-
-        if(!w || !h || !a) return alert("Заполни все поля!");
-
-        // Mifflin-St Jeor
+        const w = parseFloat(document.getElementById('weight').value), h = parseFloat(document.getElementById('height').value), a = parseFloat(document.getElementById('age').value);
+        if(!w || !h || !a) return;
         let bmr = (10 * w) + (6.25 * h) - (5 * a);
         bmr = (data.gender === 'male') ? bmr + 5 : bmr - 161;
-        
-        let tdee = bmr * act;
-        let target = (data.goal === 'loss') ? tdee * 0.8 : (data.goal === 'gain') ? tdee * 1.2 : tdee;
-
-        const bmi = w / ((h/100)**2);
-        const water = (data.gender === 'male' ? w * 0.033 : w * 0.03);
-
-        const p = w * 2; const pKcal = p * 4;
-        const f = w * 1; const fKcal = f * 9;
-        const c = (target - pKcal - fKcal) / 4; const cKcal = c * 4;
-
-        // UI
+        const act = parseFloat(document.getElementById('activity').value);
+        let target = bmr * act;
+        if(data.goal === 'loss') target *= 0.8; else if(data.goal === 'gain') target *= 1.2;
         document.getElementById('results').style.display = 'block';
         document.getElementById('outKcal').innerText = Math.round(target);
         document.getElementById('outBmr').innerText = Math.round(bmr);
-        document.getElementById('outWater').innerText = water.toFixed(1);
+        document.getElementById('outWater').innerText = (data.gender === 'male' ? w*0.033 : w*0.03).toFixed(1);
+        const bmi = w / ((h/100)**2);
         document.getElementById('outBmi').innerText = bmi.toFixed(1);
-        document.getElementById('outP').innerText = Math.round(p) + 'г';
-        document.getElementById('outF').innerText = Math.round(f) + 'г';
-        document.getElementById('outC').innerText = Math.round(c) + 'г';
-        document.getElementById('outPkcal').innerText = Math.round(pKcal) + ' ккал';
-        document.getElementById('outFkcal').innerText = Math.round(fKcal) + ' ккал';
-        document.getElementById('outCkcal').innerText = Math.round(cKcal) + ' ккал';
-
-        const bmiPtr = document.getElementById('bmiPtr');
-        let ptrPos = ((bmi - 15) / (35 - 15)) * 100;
-        bmiPtr.style.left = Math.min(Math.max(ptrPos, 0), 100) + '%';
-
-        let status = bmi < 18.5 ? "ДЕФИЦИТ" : bmi < 25 ? "НОРМА" : bmi < 30 ? "ЛИШНИЙ ВЕС" : "ОЖИРЕНИЕ";
-        document.getElementById('outBmiText').innerText = "СТАТУС: " + status;
+        document.getElementById('bmiPtr').style.left = Math.min(Math.max(((bmi - 15) / 20) * 100, 0), 100) + '%';
+        const p = w*2, f = w*1;
+        document.getElementById('outP').innerText = p + 'г';
+        document.getElementById('outPk').innerText = (p*4) + 'ккал';
+        document.getElementById('outF').innerText = f + 'г';
+        document.getElementById('outFk').innerText = (f*9) + 'ккал';
     }
-
     function copyReport() {
-        const kcal = document.getElementById('outKcal').innerText;
-        const bmi = document.getElementById('outBmi').innerText;
-        const p = document.getElementById('outP').innerText;
-        const f = document.getElementById('outF').innerText;
-        const c = document.getElementById('outC').innerText;
-        const water = document.getElementById('outWater').innerText;
-
-        const text = `📊 STATHAM DIAGNOSTIC REPORT\n\n🎯 Цель: ${kcal} ккал/день\n⚖️ ИМТ: ${bmi}\n💧 Вода: ${water}л\n\n🥩 Белки: ${p}\n🥑 Жиры: ${f}\n🍝 Углеводы: ${c}\n\nСделано в Statham Community. Рост или стагнация.`;
-        
-        navigator.clipboard.writeText(text).then(() => alert("Отчет скопирован!"));
+        const text = `STATHAM REPORT: ${document.getElementById('outKcal').innerText} ккал. Рост или стагнация.`;
+        navigator.clipboard.writeText(text); alert("Скопировано!");
     }
 </script>
 </body>

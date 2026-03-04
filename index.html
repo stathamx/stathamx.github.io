@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>STATHAM COMMUNITY | Рост или стагнация</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,6 @@
 </head>
 <body>
 
-    <!-- Модальное окно: Мем -->
     <div id="memModal" class="modal">
         <div class="modal-content modal-mem">
             <span class="close" id="closeMem">&times;</span>
@@ -23,11 +22,12 @@
         </div>
     </div>
 
-    <!-- Модальное окно: Калькулятор -->
     <div id="calcModal" class="modal">
         <div class="modal-content modal-large">
             <span class="close" id="closeCalc">&times;</span>
-            <iframe src="calculation.html" frameborder="0" class="calc-iframe"></iframe>
+            <div class="iframe-wrapper">
+                <iframe src="calculation.html" frameborder="0" class="calc-iframe"></iframe>
+            </div>
         </div>
     </div>
 
@@ -54,7 +54,6 @@
             </div>
         </section>
 
-        <!-- Направления (Bento) оставляем без изменений -->
         <section class="directions" id="directions">
             <div class="container">
                 <h2 class="section-title fade-up">НАПРАВЛЕНИЯ РОСТА</h2>
@@ -62,7 +61,7 @@
                     <div class="bento-item card-large fade-up"><div class="card-content"><span class="card-num">01</span><h3>ПОТРЕБЛЕНИЕ</h3><p>«Ты то, что ты жрёшь. Если жрёшь говно – станешь говном. И речь не только про еду.»</p></div></div>
                     <div class="bento-item card-small fade-up"><div class="card-content"><span class="card-num">02</span><h3>СПОРТ</h3><p>«Оторвись от отжиманий и сделай 20 компов.»</p></div></div>
                     <div class="bento-item card-small fade-up"><div class="card-content"><span class="card-num">03</span><h3>ФИНАНСЫ</h3><p>«Научись копить и приумножать. Не лезь в чужие дела, ведь дела могут быть в жопе.»</p></div></div>
-                    <div class="bento-item card-medium fade-up"><div class="card-content"><span class="card-num">04</span><h3>МОРАЛЬ</h3><p>«Если человек гандон — то и отношения с ним будут натянутыми.»</p></div></div>
+                    <div class="bento-item card-medium fade-up"><div class="card-content"><span class="card-num">04</span><h3>МОРАЛЬНАЯ УСТОЙЧИВОСТЬ</h3><p>«Если человек гандон — то и отношения с ним будут натянутыми.»</p></div></div>
                     <div class="bento-item card-medium fade-up"><div class="card-content"><span class="card-num">05</span><h3>РАЗУМ</h3><p>«Включай голову, а не только инстаграм. Развивайся — книги в свободном доступе.»</p></div></div>
                     <div class="bento-item card-wide fade-up"><div class="card-content"><span class="card-num">06</span><h3>ВИЗУАЛ</h3><p>«Покушал, почитал, подкачался, помылся, оделся — и ахуенчик. Твой фейс — твой мерчендайз.»</p></div></div>
                 </div>
@@ -113,7 +112,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="footer-copy">© 2026 STATHAM COMMUNITY. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
+                <p class="footer-copy">© 2026 STATHAM COMMUNITY.</p>
                 <p class="footer-hate">СДЕЛАНО С НЕНАВИСТЬЮ К ЛЕНИ</p>
             </div>
         </div>
