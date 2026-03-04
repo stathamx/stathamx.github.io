@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statham Diagnostic Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { background: #141414; padding: 20px; min-height: auto; }
+        .calc-wrapper { max-width: 700px; margin: 0 auto; background: #000; border: 1px solid #333; padding: 30px; position: relative; overflow: hidden; }
+        .scanner-line { position: absolute; top: -2px; left: 0; width: 100%; height: 2px; background: var(--primary); box-shadow: 0 0 15px var(--primary); display: none; animation: scan 1.5s linear infinite; z-index: 10; }
+        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
+        
+        .calc-title { color: var(--primary); margin-bottom: 5px; font-size: 2rem; }
+        .calc-subtitle { font-family: var(--font-mono); font-size: 0.7rem; color: #666; margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        
+        .dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 30px; display: none; }
+        .dash-card { background: #111; border: 1px solid #222; padding: 15px; text-align: left; }
+        .dash-card.highlight { border-color: var(--primary); background: #1a1d14; }
+        .dash-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--primary); display: block; margin-bottom: 5px; }
+        .dash-val { font-family: var(--font-accent); font-size: 1.8rem; color: #fff; line-height: 1; }
+        .dash-sub { font-size: 0.7rem; color: #555; }
+        
+        .verdict-box { grid-column: span 3; background: #111; padding: 20px; border-left: 4px solid var(--primary); margin-top: 10px; }
+        .verdict-title { font-family: var(--font-accent); color: var(--primary); font-size: 1.2rem; margin-bottom: 5px; }
+        .verdict-text { font-style: italic; color: #ccc; font-size: 0.9rem; }
+        
+        .bmi-scale { grid-column: span 3; height: 10px; background: linear-gradient(to right, #3498db, #2ecc71, #f1c40f, #e74c3c); margin: 15px 0; border-radius: 5px; position: relative; }
+        .bmi-pointer { position: absolute; top: -5px; width: 4px; height: 20px; background: #fff; transition: 0.5s; }
+
+        .method-note { grid-column: span 3; font-size: 0.6rem; color: #444; text-align: center; margin-top: 20px; font-family: var(--font-mono); }
+    </style>
+</head>
+<body>
+
+    <div class="calc-wrapper">
+        <div class="scanner-line" id="scanner"></div>
+        <h2 class="calc-title">BIOMETRIC ANALYSIS</h2>
+        <p class="calc-subtitle">ЦЕНТР ДИАГНОСТИКИ ПОКАЗАТЕЛЕЙ STATHAM COMMUNITY</p>
+
+        <form id="calcForm" class="calc-grid">
+            <div class="input-group">
+                <label>ПОЛ</label>
+                <select id="gender">
+                    <option value="male">МУЖСКОЙ</option>
+                    <option value="female">ЖЕНСКИЙ</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>ВЕС (КГ)</label>
+                <input type="number" id="weight" placeholder="00" required>
+            </div>
+            <div class="input-group">
+                <label>РОСТ (СМ)</label>
+                <input type="number" id="height" placeholder="000" required>
+            </div>
+            <div class="input-group">
+                <label>ВОЗРАСТ</label>
+                <input type="number" id="age" placeholder="00" required>
+            </div>
+            <div class="input-group full-width">
+                <label>УРОВЕНЬ АКТИВНОСТИ</label>
+                <select id="activity">
+                    <option value="1.2">Сидячий (без нагрузок)</option>
+                    <option value="1.375">Минимальный (1-2 раза в нед.)</option>
+                    <option value="1.55" selected>Средний (3-5 раз в нед.)</option>
+                    <option value="1.725">Высокий (6-7 раз в нед.)</option>
+                </select>
+            </div>
+            <div class="input-group full-width">
+                <label>ЦЕЛЬ</label>
+                <select id="goal">
+                    <option value="weight_loss">СБРОС БАЛЛАСТА (-20%)</option>
+                    <option value="maintain">ПОДДЕРЖАНИЕ СТАТУС-КВО</option>
+                    <option value="weight_gain">НАБОР МАССЫ (+20%)</option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary full-width" onclick="runDiagnostic()">ЗАПУСТИТЬ АНАЛИЗ</button>
+        </form>
+
+        <div id="dashboard" class="dashboard">
+            <div class="dash-card highlight">
+                <span class="dash-label">ЦЕЛЬ / ККАЛ</span>
+                <span class="dash-val" id="res-kcal">0</span>
+                <span class="dash-sub">ккал/день</span>
+            </div>
+            <div class="dash-card">
+                <span class="dash-label">ИМТ (BMI)</span>
+                <span class="dash-val" id="res-bmi">0</span>
+                <span class="dash-sub" id="res-bmi-text">Норма</span>
+            </div>
+            <div class="dash-card">
+                <span class="dash-label">ВОДА</span>
+                <span class="dash-val" id="res-water">0</span>
+                <span class="dash-sub">литров/день</span>
+            </div>
+
+            <div class="bmi-scale"><div class="bmi-pointer" id="bmiPointer"></div></div>
+
+            <div class="dash-card">
+                <span class="dash-label">БЕЛКИ</span>
+                <span class="dash-val" id="res-p">0</span>
+                <span class="dash-sub">грамм</span>
+            </div>
+            <div class="dash-card">
+                <span class="dash-label">ЖИРЫ</span>
+                <span class="dash-val" id="res-f">0</span>
+                <span class="dash-sub">грамм</span>
+            </div>
+            <div class="dash-card">
+                <span class="dash-label">УГЛЕВОДЫ</span>
+                <span class="dash-val" id="res-c">0</span>
+                <span class="dash-sub">грамм</span>
+            </div>
+
+            <div class="dash-card highlight" style="grid-column: span 3;">
+                <span class="dash-label">БАЗАЛЬНЫЙ МЕТАБОЛИЗМ (BMR)</span>
+                <span class="dash-val" id="res-bmr">0</span>
+                <span class="dash-sub">ккал — столько ты тратишь, если просто лежишь на диване</span>
+            </div>
+
+            <div class="verdict-box">
+                <div class="verdict-title">ВЕРДИКТ СТЕТХЕМА:</div>
+                <div class="verdict-text" id="res-verdict">Загрузка данных...</div>
+            </div>
+
+            <div class="method-note">ALGORITHM: MIFFLIN-ST JEOR EQUATION (2000) • STATHAM CERTIFIED</div>
+        </div>
+    </div>
+
+    <script>
+        function runDiagnostic() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const age = parseFloat(document.getElementById('age').value);
+            
+            if(!weight || !height || !age) { alert("Введи данные, боец."); return; }
+
+            const scanner = document.getElementById('scanner');
+            const dashboard = document.getElementById('dashboard');
+            const form = document.getElementById('calcForm');
+
+            scanner.style.display = 'block';
+            
+            setTimeout(() => {
+                scanner.style.display = 'none';
+                form.style.display = 'none';
+                dashboard.style.display = 'grid';
+                calculate();
+            }, 1500);
+        }
+
+        function calculate() {
+            const gender = document.getElementById('gender').value;
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const age = parseFloat(document.getElementById('age').value);
+            const activity = parseFloat(document.getElementById('activity').value);
+            const goal = document.getElementById('goal').value;
+
+            // BMR (Mifflin-St Jeor)
+            let bmr = (10 * weight) + (6.25 * height) - (5 * age);
+            bmr = (gender === 'male') ? bmr + 5 : bmr - 161;
+
+            // Total Calories
+            let tdee = bmr * activity;
+            let targetKcal = (goal === 'weight_loss') ? tdee * 0.8 : (goal === 'weight_gain') ? tdee * 1.2 : tdee;
+
+            // BMI
+            const bmi = weight / ((height/100) ** 2);
+            let bmiStatus = "";
+            let verdict = "";
+
+            if(bmi < 18.5) { 
+                bmiStatus = "Дефицит"; 
+                verdict = "Рама есть — мяса нет. Налегай на сложные углеводы, иначе тебя сдует первым же встречным ветром.";
+            } else if(bmi < 25) { 
+                bmiStatus = "Норма"; 
+                verdict = "Ты в рабочей форме. Не расслабляйся, дисциплина важнее таланта.";
+            } else if(bmi < 30) { 
+                bmiStatus = "Предожирение"; 
+                verdict = "Начинаешь обрастать лишним. Убери мусор из рациона, пока он не убрал твою выносливость.";
+            } else { 
+                bmiStatus = "Ожирение"; 
+                verdict = "Сбрось балласт, если хочешь быть маневренным. Лишний вес — это лишние оправдания.";
+            }
+
+            // Water
+            const water = gender === 'male' ? weight * 0.033 : weight * 0.03;
+
+            // Macros
+            const p = weight * 2;
+            const f = weight * 1;
+            const c = (targetKcal - (p*4) - (f*9)) / 4;
+
+            // Output
+            document.getElementById('res-kcal').innerText = Math.round(targetKcal);
+            document.getElementById('res-bmr').innerText = Math.round(bmr);
+            document.getElementById('res-bmi').innerText = bmi.toFixed(1);
+            document.getElementById('res-bmi-text').innerText = bmiStatus;
+            document.getElementById('res-water').innerText = water.toFixed(1);
+            document.getElementById('res-p').innerText = Math.round(p);
+            document.getElementById('res-f').innerText = Math.round(f);
+            document.getElementById('res-c').innerText = Math.round(c);
+            document.getElementById('res-verdict').innerText = verdict;
+
+            // BMI Pointer
+            let pointerPos = ((bmi - 15) / (35 - 15)) * 100;
+            pointerPos = Math.max(0, Math.min(100, pointerPos));
+            document.getElementById('bmiPointer').style.left = pointerPos + "%";
+        }
+    </script>
+</body>
+</html>

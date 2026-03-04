@@ -1,6 +1,7 @@
+/* ПЕРЕМЕННЫЕ */
 :root {
-    --primary: #A3B565;
-    --primary-dark: #8a9c52;
+    --primary: #A3B565; /* Оливковый тактический */
+    --primary-glow: rgba(163, 181, 101, 0.4);
     --bg: #0A0A0A;
     --card-bg: #141414;
     --text: #F5F5F5;
@@ -11,11 +12,9 @@
     --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* СБРОСЫ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
     background-color: var(--bg);
@@ -23,6 +22,7 @@ body {
     font-family: var(--font-main);
     line-height: 1.6;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
 .container {
@@ -31,9 +31,10 @@ body {
     padding: 0 30px;
 }
 
+/* ТИПОГРАФИКА */
 h1, h2, h3 { font-family: var(--font-accent); text-transform: uppercase; letter-spacing: 1px; }
 
-/* Кнопки */
+/* КНОПКИ */
 .btn {
     display: inline-block;
     padding: 14px 32px;
@@ -48,7 +49,7 @@ h1, h2, h3 { font-family: var(--font-accent); text-transform: uppercase; letter-
 }
 
 .btn-primary { background: var(--primary); color: #000; }
-.btn-primary:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(163,181,101,0.3); }
+.btn-primary:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 10px 20px var(--primary-glow); }
 
 .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
 .btn-outline:hover { background: var(--primary); color: #000; }
@@ -56,125 +57,106 @@ h1, h2, h3 { font-family: var(--font-accent); text-transform: uppercase; letter-
 .btn-text { background: transparent; color: #fff; font-size: 1rem; letter-spacing: 1px; }
 .btn-text:hover { color: var(--primary); }
 
-/* Специальная кнопка CTA (чтобы не сливалась) */
+/* ФИНАЛЬНАЯ КНОПКА (CTA) */
 .btn-cta {
     background: #fff;
     color: #000;
     padding: 20px 45px;
-    font-size: 1.5rem;
-    box-shadow: 0 0 0 5px rgba(163, 181, 101, 0.4);
+    font-size: 1.6rem;
+    box-shadow: 0 0 0 5px var(--primary-glow);
+    font-family: var(--font-accent);
+    text-decoration: none;
+    display: inline-block;
 }
 .btn-cta:hover {
     background: var(--primary);
     transform: scale(1.05);
-    box-shadow: 0 0 0 8px rgba(163, 181, 101, 0.2);
+    box-shadow: 0 0 0 10px rgba(163, 181, 101, 0.2);
 }
 
-/* Header */
+/* ШАПКА */
 .header {
     position: fixed; top: 0; width: 100%; z-index: 100;
-    padding: 20px 0; backdrop-filter: blur(10px);
+    padding: 15px 0; backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: rgba(10, 10, 10, 0.7);
 }
 .header-inner { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-family: var(--font-accent); font-size: 1.8rem; color: var(--primary); }
+.logo { font-family: var(--font-accent); font-size: 2rem; color: var(--primary); }
 .logo span { color: #fff; }
-.header-buttons { display: flex; gap: 15px; align-items: center; }
+.header-buttons { display: flex; gap: 20px; align-items: center; }
 
-/* Hero */
+/* ГЕРОЙ */
 .hero { height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; }
 .hero-bg { position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1; }
-.hero-bg img { width:100%; height:100%; object-fit:cover; filter: brightness(0.4) grayscale(0.5); }
+.hero-bg img { width:100%; height:100%; object-fit:cover; filter: brightness(0.3) grayscale(0.4); }
 .hero-content { max-width: 900px; }
-.hero-title { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; margin-bottom: 30px; }
+.hero-title { font-size: clamp(2.5rem, 6vw, 4.8rem); line-height: 1; margin-bottom: 30px; }
 .hero-title span { color: var(--primary); display: block; }
-.hero-subtitle { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; }
-.badge { display: inline-block; font-family: var(--font-mono); color: var(--primary); border: 1px solid var(--primary); padding: 4px 12px; font-size: 0.8rem; margin-bottom: 20px; }
+.hero-subtitle { font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin-bottom: 40px; font-weight: 300; }
+.badge { display: inline-block; font-family: var(--font-mono); color: var(--primary); border: 1px solid var(--primary); padding: 5px 15px; font-size: 0.8rem; margin-bottom: 25px; }
 
-/* Bento Grid */
-.directions { padding: 100px 0; }
-.section-title { font-size: 3rem; margin-bottom: 60px; color: var(--primary); text-align: center; }
-.section-title.left { text-align: left; margin-bottom: 30px; }
-.bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 250px; gap: 20px; }
-.bento-item { background: var(--card-bg); padding: 40px; border: 1px solid rgba(255,255,255,0.03); transition: var(--transition); }
-.bento-item:hover { border-color: var(--primary); transform: translateY(-5px); }
-.card-num { font-family: var(--font-mono); font-size: 0.9rem; color: var(--primary); display: block; margin-bottom: 20px; }
+/* BENTO GRID */
+.directions { padding: 120px 0; }
+.section-title { font-size: 3.5rem; margin-bottom: 70px; color: var(--primary); text-align: center; }
+.section-title.left { text-align: left; margin-bottom: 35px; }
+.bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 260px; gap: 25px; }
+.bento-item { background: var(--card-bg); padding: 45px; border: 1px solid rgba(255,255,255,0.03); transition: var(--transition); position: relative; }
+.bento-item:hover { border-color: var(--primary); transform: translateY(-8px); background: #1a1a1a; }
+.card-num { font-family: var(--font-mono); font-size: 0.85rem; color: var(--primary); display: block; margin-bottom: 25px; opacity: 0.6; }
+.bento-item h3 { font-size: 1.8rem; margin-bottom: 15px; }
+.bento-item p { color: var(--text-muted); font-size: 1rem; }
 .card-large { grid-column: span 2; grid-row: span 2; }
 .card-wide { grid-column: span 2; }
 
-/* Rules */
-.rules { padding: 100px 0; background: #0F0F0F; }
-.rules-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.rules-image img { width: 100%; filter: grayscale(1); border-radius: 2px; }
-.rules-text { font-size: 1.3rem; margin-bottom: 20px; color: #ccc; }
-.rules-note { font-family: var(--font-mono); color: var(--primary); margin-bottom: 25px; font-size: 1.1rem; text-transform: uppercase; }
-.rule-item { font-family: var(--font-accent); font-size: 2rem; margin-bottom: 15px; display: flex; align-items: center; gap: 20px; }
-.rule-item span { color: var(--primary); font-family: var(--font-mono); font-size: 1rem; border: 1px solid var(--primary); padding: 5px 10px; }
+/* ПРАВИЛА */
+.rules { padding: 120px 0; background: #0c0c0c; }
+.rules-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+.rules-image img { width: 100%; filter: grayscale(1) contrast(1.1); border-radius: 4px; border: 1px solid #222; }
+.rules-text { font-size: 1.4rem; margin-bottom: 25px; color: #ddd; font-weight: 300; }
+.rules-note { font-family: var(--font-mono); color: var(--primary); margin-bottom: 30px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; }
+.rule-item { font-family: var(--font-accent); font-size: 2.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 25px; }
+.rule-item span { color: var(--primary); font-family: var(--font-mono); font-size: 1.1rem; border: 1px solid var(--primary); padding: 6px 12px; }
 
-/* CTA */
-.cta { padding: 100px 0; }
-.cta-box { background: var(--card-bg); border: 2px solid var(--primary); padding: 80px 40px; text-align: center; }
-.cta-title { font-size: 3.5rem; margin-bottom: 20px; }
-.cta-text { font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px; color: var(--text-muted); }
+/* CTA СЕКЦИЯ */
+.cta { padding: 120px 0; }
+.cta-box { background: var(--card-bg); border: 2px solid var(--primary); padding: 90px 50px; text-align: center; position: relative; }
+.cta-title { font-size: 3.8rem; margin-bottom: 25px; }
+.cta-text { font-size: 1.3rem; max-width: 700px; margin: 0 auto 50px; color: var(--text-muted); }
 
-/* Modals */
-.modal { display: none; position: fixed; z-index: 1000; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; padding: 20px; }
-.modal-content { background: var(--card-bg); padding: 40px; width: 100%; position: relative; border-top: 4px solid var(--primary); }
-.modal-mem { max-width: 500px; padding: 30px; text-align: center; }
-.modal-large { max-width: 800px; }
+/* МОДАЛЬНЫЕ ОКНА */
+.modal { display: none; position: fixed; z-index: 2000; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.96); align-items: center; justify-content: center; padding: 20px; }
+.modal-content { background: var(--card-bg); position: relative; border-top: 5px solid var(--primary); width: 100%; }
+.modal-large { max-width: 850px; }
 
-/* Исправление размера изображения в модалке */
-.modal-img-container {
-    width: 100%;
-    max-height: 60vh; /* Ограничиваем высоту картинки до 60% высоты экрана */
-    overflow: hidden;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.modal-img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* Картинка не обрезается и вписывается в контейнер */
-}
+/* Фикс размера мема */
+.modal-mem { max-width: 550px; padding: 40px; text-align: center; }
+.modal-img-container { width: 100%; max-height: 65vh; overflow: hidden; margin-bottom: 25px; display: flex; justify-content: center; }
+.modal-img { max-width: 100%; max-height: 100%; object-fit: contain; border: 1px solid #333; }
+.modal-caption { font-family: var(--font-accent); font-size: 1.8rem; color: #fff; line-height: 1.2; }
+.modal-badge { font-family: var(--font-mono); color: var(--primary); font-size: 0.9rem; margin-bottom: 20px; letter-spacing: 3px; }
 
-.modal-badge { font-family: var(--font-mono); color: var(--primary); font-size: 0.8rem; margin-bottom: 15px; }
-.modal-caption { font-family: var(--font-accent); font-size: 1.5rem; color: #fff; }
+.close { position: absolute; top: 20px; right: 25px; font-size: 2.5rem; cursor: pointer; color: var(--text-muted); z-index: 100; transition: 0.3s; }
+.close:hover { color: var(--primary); transform: rotate(90deg); }
 
-/* Калькулятор UI */
-.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
-.input-group { display: flex; flex-direction: column; gap: 5px; }
-.full-width { grid-column: span 2; }
-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--primary); }
-input, select { background: #000; border: 1px solid #333; padding: 12px; color: #fff; }
-.result-display { margin-top: 25px; padding-top: 25px; border-top: 1px solid #333; display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-.res-card { background: #000; padding: 15px; text-align: center; border-bottom: 2px solid var(--primary); }
-.res-val { font-family: var(--font-accent); font-size: 1.8rem; display: block; color: var(--primary); }
-.res-label { font-size: 0.65rem; color: var(--text-muted); }
-
-.close { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--text-muted); z-index: 10; }
-
-/* Footer */
-.footer { padding: 50px 0; border-top: 1px solid #222; }
-.footer-inner { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); }
-
-/* Animations */
-.fade-up { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+/* АНИМАЦИИ ПРИ СКРОЛЛЕ */
+.fade-up { opacity: 0; transform: translateY(50px); transition: opacity 1s ease, transform 1s ease; }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-@media (max-width: 992px) {
+/* АДАПТИВНОСТЬ */
+@media (max-width: 1024px) {
     .bento-grid { grid-template-columns: repeat(2, 1fr); }
-    .rules-wrapper { grid-template-columns: 1fr; gap: 40px; }
-    .section-title { font-size: 2.2rem; }
+    .rules-wrapper { grid-template-columns: 1fr; gap: 60px; }
+    .section-title { font-size: 2.8rem; }
 }
 
 @media (max-width: 600px) {
     .header-buttons .btn-text { display: none; }
     .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
     .card-large, .card-wide { grid-column: span 1; }
-    .hero-title { font-size: 2.5rem; }
-    .cta-title { font-size: 1.8rem; }
-    .btn-cta { font-size: 1.1rem; padding: 15px 25px; }
-    .rule-item { font-size: 1.4rem; }
+    .hero-title { font-size: 2.8rem; }
+    .cta-title { font-size: 2.2rem; }
+    .btn-cta { font-size: 1.2rem; padding: 18px 30px; }
+    .rule-item { font-size: 1.6rem; }
+    .modal-content { padding: 30px 15px; }
 }
