@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STATHAM COMMUNITY | Рост или стагнация</title>
     
-    <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -14,17 +13,17 @@
 </head>
 <body>
 
-    <!-- Модальное окно: Мем -->
     <div id="memModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content modal-mem">
             <span class="close" id="closeMem">&times;</span>
             <div class="modal-badge">STATHAM ADVICE</div>
-            <img src="assets/death-in-poverty.jpg" alt="Advice" class="modal-img">
+            <div class="modal-img-container">
+                <img src="assets/death-in-poverty.jpg" alt="Advice" class="modal-img">
+            </div>
             <p class="modal-caption">Деньги не главное, главное их наличие</p>
         </div>
     </div>
 
-    <!-- Модальное окно: Калькулятор (Интегрированный) -->
     <div id="calcModal" class="modal">
         <div class="modal-content modal-large">
             <span class="close" id="closeCalc">&times;</span>
@@ -74,9 +73,7 @@
                     <button type="button" class="btn btn-primary full-width" onclick="calculateKBJU()">РАССЧИТАТЬ МАКРОСЫ</button>
                 </form>
 
-                <div id="result" class="result-display" style="display: none;">
-                    <!-- Сюда JS вставит данные -->
-                </div>
+                <div id="result" class="result-display" style="display: none;"></div>
             </div>
         </div>
     </div>
@@ -86,19 +83,18 @@
             <div class="logo">STATHAM <span>COMMUNITY</span></div>
             <nav class="header-buttons">
                 <button class="btn btn-text" id="calcBtn">КАЛЬКУЛЯТОР</button>
-                <button class="btn btn-outline" id="memBtn">БАЗА</button>
+                <button class="btn btn-outline" id="memBtn">ты еще сюда нажми</button>
             </nav>
         </div>
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section class="hero">
             <div class="hero-bg">
                 <img src="assets/statham-hero.jpg" alt="Jason Statham Hero">
             </div>
             <div class="container hero-content">
-                <div class="badge fade-up">EST. 2024</div>
+                <div class="badge fade-up">EST. 2026</div>
                 <h1 class="hero-title fade-up">Запомни две фразы и перед тобой откроются любые двери – <span>от себя и на себя.</span></h1>
                 <p class="hero-subtitle fade-up">Вместо нытья — работа. Вместо кредитов — инвестиции. Рост или стагнация. Третьего не дано.</p>
                 <div class="hero-actions fade-up">
@@ -107,7 +103,6 @@
             </div>
         </section>
 
-        <!-- Directions Section (Bento Grid) -->
         <section class="directions" id="directions">
             <div class="container">
                 <h2 class="section-title fade-up">НАПРАВЛЕНИЯ РОСТА</h2>
@@ -158,15 +153,15 @@
             </div>
         </section>
 
-        <!-- Rules Section -->
         <section class="rules">
             <div class="container rules-wrapper">
                 <div class="rules-image fade-up">
                     <img src="assets/statham-portrait.jpg" alt="Statham">
                 </div>
                 <div class="rules-content fade-up">
-                    <h2 class="section-title left">СЕКРЕТ УСПЕХА ПРОСТ</h2>
+                    <h2 class="section-title left">Секрет успеха прост - но это секрет.</h2>
                     <p class="rules-text">Если ты готов ебашить, то тебе сюда. Главное взвешанное желание идти до конца, а конец у всех свой. Есть сомнения — то нахуй оно тебе надо, кайфуй пока молодой.</p>
+                    <div class="rules-note">И главное запомни:</div>
                     <div class="rules-list">
                         <div class="rule-item"><span>01</span> Бьют — дерись.</div>
                         <div class="rule-item"><span>02</span> Упал — поднимись.</div>
@@ -176,13 +171,12 @@
             </div>
         </section>
 
-        <!-- CTA Section -->
         <section class="cta">
             <div class="container">
                 <div class="cta-box fade-up">
                     <h2 class="cta-title">ДЕЛАЙ КАК НАДО, КАК НЕ НАДО НЕ ДЕЛАЙ.</h2>
                     <p class="cta-text">Если тебя огорчает наступление понедельника, работай без выходных и врывайся с двух ног.</p>
-                    <a href="https://t.me/+xe--AqXESy5hMDQy" class="btn btn-primary btn-lg" target="_blank">ВОРВАТЬСЯ В COMMUNITY</a>
+                    <a href="https://t.me/+xe--AqXESy5hMDQy" class="btn btn-cta" target="_blank">ВОРВАТЬСЯ В STATHAM COMMUNITY</a>
                 </div>
             </div>
         </section>
