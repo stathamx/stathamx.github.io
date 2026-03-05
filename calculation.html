@@ -14,11 +14,12 @@
         h2 { font-family: 'Bebas Neue'; color: var(--primary); font-size: 1.8rem; margin-bottom: 5px; }
         .subtitle { font-family: 'JetBrains Mono'; font-size: 0.6rem; color: #555; margin-bottom: 20px; }
 
+        /* Форма */
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .group { display: flex; flex-direction: column; gap: 5px; }
         .full { grid-column: span 2; }
         label { font-family: 'JetBrains Mono'; font-size: 0.65rem; color: var(--primary); text-transform: uppercase; }
-        input, select { background: #050505; border: 1px solid #333; padding: 12px; color: #fff; font-size: 1rem; border-radius: 0; }
+        input, select { background: #050505; border: 1px solid #333; padding: 12px; color: #fff; font-size: 1rem; border-radius: 0; width: 100%; }
         
         .toggle-group { display: flex; gap: 5px; }
         .toggle-btn { flex: 1; padding: 10px; border: 1px solid #333; background: transparent; color: #666; cursor: pointer; font-family: 'Bebas Neue'; font-size: 1rem; }
@@ -36,7 +37,6 @@
         .res-val { font-family: 'Bebas Neue'; font-size: 1.8rem; line-height: 1; }
         .res-sub { font-size: 0.7rem; color: #555; margin-top: 5px; }
 
-        /* ИМТ и Анализ */
         .diag-box { grid-column: span 2; background: #080808; padding: 20px; border: 1px solid #333; margin: 10px 0; }
         .bmi-status { font-family: 'Bebas Neue'; font-size: 1.4rem; color: var(--primary); margin-top: 10px; }
         .bmi-bar { height: 6px; background: linear-gradient(to right, #3498db, #2ecc71, #f1c40f, #e74c3c); margin: 15px 0; position: relative; }
@@ -52,9 +52,28 @@
         .btn-copy { background: transparent; border: 1px solid #333; color: #666; padding: 12px; font-family: 'JetBrains Mono'; font-size: 0.7rem; cursor: pointer; width: 100%; margin-top: 10px; }
 
         @media (max-width: 600px) {
-            .form-grid { grid-template-columns: 1fr; }
-            .res-grid { grid-template-columns: 1fr; }
-            .res-card.accent, .diag-box { grid-column: span 1; }
+            .form-grid { 
+                grid-template-columns: 1fr;
+            }
+            .group {
+                grid-column: span 1 !important;
+            }
+            .full {
+                grid-column: span 1 !important;
+            }
+            .res-grid { 
+                grid-template-columns: 1fr;
+            }
+            .res-card.accent, .diag-box { 
+                grid-column: span 1 !important; 
+            }
+            .age-act-flex {
+                flex-direction: column;
+                gap: 12px !important;
+            }
+            #age {
+                width: 100% !important;
+            }
         }
     </style>
 </head>
@@ -71,12 +90,12 @@
                 <button class="toggle-btn" onclick="setToggle('gender', 'female', this)">ЖЕНСКИЙ</button>
             </div>
         </div>
-        <div class="group"><label>ВЕС (КГ)</label><input type="number" id="weight" placeholder="00"></div>
-        <div class="group"><label>РОСТ (СМ)</label><input type="number" id="height" placeholder="000"></div>
+        <div class="group"><label>ВЕС (КГ)</label><input type="number" id="weight" placeholder="00" inputmode="decimal"></div>
+        <div class="group"><label>РОСТ (СМ)</label><input type="number" id="height" placeholder="000" inputmode="decimal"></div>
         <div class="group full">
             <label>ВОЗРАСТ / АКТИВНОСТЬ</label>
-            <div style="display:flex; gap:10px;">
-                <input type="number" id="age" style="width:70px" placeholder="25">
+            <div class="age-act-flex" style="display:flex; gap:10px;">
+                <input type="number" id="age" style="width:80px" placeholder="25" inputmode="numeric">
                 <select id="activity" style="flex-grow:1;">
                     <option value="1.2">Сидячий (нет нагрузок)</option>
                     <option value="1.375">Легкая (1-3 трен/нед)</option>
@@ -153,26 +172,16 @@
 
         if(!w || !h || !a) { alert("Заполни все данные, боец!"); return; }
 
-        // BMR Mifflin-St Jeor
         let bmr = (10 * w) + (6.25 * h) - (5 * a);
         bmr = (data.gender === 'male') ? bmr + 5 : bmr - 161;
-        
-        // TDEE and Target
         let tdee = bmr * act;
         let target = (data.goal === 'loss') ? tdee * 0.8 : (data.goal === 'gain') ? tdee * 1.2 : tdee;
-
-        // BMI
         const bmi = w / ((h/100)**2);
-        
-        // Water
         const water = (data.gender === 'male' ? w * 0.033 : w * 0.03);
-
-        // Macros
         const p = w * 2;
         const f = w * 1;
         const c = (target - (p*4) - (f*9)) / 4;
 
-        // UI Results
         document.getElementById('results').style.display = 'block';
         document.getElementById('outKcal').innerText = Math.round(target);
         document.getElementById('outBmr').innerText = Math.round(bmr);
@@ -186,41 +195,20 @@
         document.getElementById('outFk').innerText = Math.round(f*9) + ' ккал';
         document.getElementById('outCk').innerText = Math.round(c*4) + ' ккал';
 
-        // BMI Status and Verdict
-        let status = "";
-        let verdict = "";
-        let color = "#fff";
-
-        if(bmi < 18.5) {
-            status = "ДЕФИЦИТ МАССЫ";
-            verdict = "Твоему телу не хватает ресурсов. Рост невозможен при пустом баке. Увеличь калорийность и добавь силовые нагрузки.";
-            color = "#3498db";
-        } else if(bmi < 25) {
-            status = "НОРМАЛЬНЫЙ ВЕС";
-            verdict = "Ты в рабочей кондиции. Идеальное время, чтобы сосредоточиться на качестве мышц и дисциплине питания.";
-            color = "#2ecc71";
-        } else if(bmi < 30) {
-            status = "ИЗБЫТОЧНЫЙ ВЕС";
-            verdict = "Есть лишний балласт. Он замедляет тебя и перегружает сердце. Рекомендуется дефицит калорий.";
-            color = "#f1c40f";
-        } else {
-            status = "ОЖИРЕНИЕ";
-            verdict = "Критическая зона. Лишний жир — это системный риск. Срочно пересмотри стратегию питания, пока не стало поздно.";
-            color = "#e74c3c";
-        }
+        let status = ""; let verdict = ""; let color = "#fff";
+        if(bmi < 18.5) { status = "ДЕФИЦИТ МАССЫ"; verdict = "Твоему телу не хватает ресурсов. Рост невозможен при пустом баке."; color = "#3498db"; }
+        else if(bmi < 25) { status = "НОРМАЛЬНЫЙ ВЕС"; verdict = "Ты в рабочей кондиции. Идеальное время для дисциплины."; color = "#2ecc71"; }
+        else if(bmi < 30) { status = "ИЗБЫТОЧНЫЙ ВЕС"; verdict = "Есть лишний балласт. Он замедляет тебя."; color = "#f1c40f"; }
+        else { status = "ОЖИРЕНИЕ"; verdict = "Критическая зона. Срочно пересмотри стратегию питания."; color = "#e74c3c"; }
 
         document.getElementById('outBmiText').innerText = status;
         document.getElementById('outBmiText').style.color = color;
         document.getElementById('outVerdict').innerText = verdict;
-
         const bmiPtr = document.getElementById('bmiPtr');
         let ptrPos = ((bmi - 15) / (35 - 15)) * 100;
         bmiPtr.style.left = Math.min(Math.max(ptrPos, 0), 100) + '%';
         
-        // Auto-scroll on mobile
-        setTimeout(() => {
-            window.scrollTo({ top: document.getElementById('results').offsetTop, behavior: 'smooth' });
-        }, 100);
+        setTimeout(() => { window.scrollTo({ top: document.getElementById('results').offsetTop, behavior: 'smooth' }); }, 100);
     }
 
     function copyReport() {
@@ -233,10 +221,7 @@
         const c = document.getElementById('outC').innerText;
 
         const text = `📊 STATHAM DIAGNOSTIC REPORT\n\n🎯 Цель: ${kcal} ккал/день\n⚖️ ИМТ: ${bmi} (${status})\n💧 Вода: ${water}л\n\n🥩 Белки: ${p}\n🥑 Жиры: ${f}\n🍝 Углеводы: ${c}\n\nСделано в Statham Community.`;
-        
-        navigator.clipboard.writeText(text).then(() => {
-            alert("Полный диагностический отчет скопирован в буфер!");
-        });
+        navigator.clipboard.writeText(text).then(() => { alert("Полный диагностический отчет скопирован!"); });
     }
 </script>
 </body>

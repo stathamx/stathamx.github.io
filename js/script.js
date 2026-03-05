@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Инициализация модалок
-    setupModal('memModal', 'memBtn', 'closeMem');
     setupModal('calcModal', 'calcBtn', 'closeCalc');
 
     // --- АНИМАЦИЯ ПОЯВЛЕНИЯ ЭЛЕМЕНТОВ ПРИ СКРОЛЛЕ ---
