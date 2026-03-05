@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- УПРАВЛЕНИЕ МОДАЛЬНЫМИ ОКНАМИ ---
     const setupModal = (modalId, btnId, closeId) => {
         const modal = document.getElementById(modalId);
         const btn = document.getElementById(btnId);
@@ -10,12 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.onclick = (e) => {
                 e.preventDefault();
                 modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden'; // Запрет скролла при открытой модалке
+                document.body.style.overflow = 'hidden';
             };
             
             const closeModal = () => {
                 modal.style.display = 'none';
-                document.body.style.overflow = ''; // Возврат скролла
+                document.body.style.overflow = '';
             };
 
             close.onclick = closeModal;
@@ -26,10 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Инициализация модалок
     setupModal('calcModal', 'calcBtn', 'closeCalc');
 
-    // --- АНИМАЦИЯ ПОЯВЛЕНИЯ ЭЛЕМЕНТОВ ПРИ СКРОЛЛЕ ---
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -39,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // После появления можно прекратить наблюдение за элементом
                 observer.unobserve(entry.target);
             }
         });
@@ -47,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    // --- ПЛАВНЫЙ СКРОЛЛ ДЛЯ ЯКОРЕЙ ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
