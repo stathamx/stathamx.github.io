@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.style.overflow = '';
             };
 
-            close.onclick = closeModal;
+            if (close) close.onclick = closeModal;
             
             window.addEventListener('click', (e) => {
                 if (e.target === modal) closeModal();
@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     setupModal('calcModal', 'calcBtn', 'closeCalc');
+    
+    setupModal('aiModal', 'aiBtn', 'closeAi');
 
     const observerOptions = {
         threshold: 0.1,

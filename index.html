@@ -11,6 +11,7 @@
 </head>
 <body>
 
+    <!-- Модалка: Калькулятор КБЖУ -->
     <div id="calcModal" class="modal">
         <div class="modal-content modal-large">
             <span class="close" id="closeCalc">&times;</span>
@@ -20,28 +21,42 @@
         </div>
     </div>
 
+    <!-- Модалка: AI TRAINER PROMPT -->
+    <div id="aiModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close" id="closeAi">&times;</span>
+            <div class="iframe-scroll-wrapper">
+                <iframe src="ai-trainer.html" frameborder="0" class="calc-iframe"></iframe>
+            </div>
+        </div>
+    </div>
+
     <header class="header">
         <div class="container header-inner">
             <a href="#" class="logo">STATHAM <span>COMMUNITY</span></a>
-            <nav class="header-buttons">
-                <button class="btn btn-text" id="calcBtn">КАЛЬКУЛЯТОР КБЖУ</button>
-            </nav>
         </div>
     </header>
 
+    <!-- НОВАЯ ПАНЕЛЬ КНОПОК ПОД ШАПКОЙ -->
+    <div class="action-panel">
+        <div class="container action-grid">
+            <button class="btn btn-primary" id="calcBtn">КАЛЬКУЛЯТОР КБЖУ</button>
+            <button class="btn btn-outline" id="aiBtn">AI TRAINER PROMPT</button>
+        </div>
+    </div>
+
     <main>
+        <!-- Hero, Bento, Rules, CTA остаются как в прошлых версиях -->
         <section class="hero">
-            <div class="hero-bg"><img src="assets/statham-hero.jpg" alt="Hero"></div>
+            <div class="hero-bg"><img src="assets/statham-hero.jpg" alt="Statham"></div>
             <div class="container hero-content">
                 <div class="badge fade-up">EST. 2026</div>
                 <h1 class="hero-title fade-up">Запомни две фразы и перед тобой откроются любые двери – <span>от себя и на себя.</span></h1>
                 <p class="hero-subtitle fade-up">Вместо нытья — работа. Вместо кредитов — инвестиции. Рост или стагнация. Третьего не дано.</p>
-                <div class="hero-actions fade-up">
-                    <a href="#directions" class="btn btn-primary">ИЗУЧИТЬ НАПРАВЛЕНИЯ</a>
-                </div>
             </div>
         </section>
 
+        <!-- Directions, Rules, CTA... -->
         <section class="directions" id="directions">
             <div class="container">
                 <h2 class="section-title fade-up">НАПРАВЛЕНИЯ РОСТА</h2>
@@ -109,7 +124,7 @@
 
     <footer class="footer">
         <div class="container footer-bottom">
-            <p class="footer-copy">© 2026 STATHAM COMMUNITY. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
+            <p>© 2026 STATHAM COMMUNITY. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
             <p class="footer-hate">СДЕЛАНО С НЕНАВИСТЬЮ К ЛЕНИ</p>
         </div>
     </footer>
