@@ -100,16 +100,23 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-main);
 }
 
 @media (max-width: 600px) {
-    .action-panel { margin-top: 60px; padding: 10px 0; }
-    .action-grid { flex-direction: column; gap: 10px; padding: 0 20px; }
-    .action-grid .btn { width: 100%; font-size: 0.95rem; }
-
-    .hero { text-align: center; }
-    .hero-subtitle { margin: 0 auto 30px; }
-    .bento-grid { grid-template-columns: 1fr; }
-    .card-large, .card-wide { grid-column: span 1; grid-row: span 1; }
-    .footer-bottom { flex-direction: column; text-align: center; gap: 10px; }
-    .modal-large { height: 100%; max-height: 100vh; }
+    .action-panel {
+        margin-top: 85px !important; 
+        padding: 10px 0;
+    }
+    .action-grid {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 20px;
+    }
+    .modal {
+        align-items: flex-start;
+        padding: 0;
+    }
+    .modal-large {
+        height: 100%;
+        max-height: 100vh;
+    }
 }
 
 .fade-up { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
